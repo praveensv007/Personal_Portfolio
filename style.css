@@ -1277,30 +1277,101 @@ transform:translateY(-6px);
 .stack-pills{
     justify-content:center;
 }}
-@media(max-width:768px){
 
-.footer-wrap{
+@media (max-width:768px){
+
+.hero-grid{
+    display:flex;
     flex-direction:column;
     text-align:center;
-}
-.btn{
-    min-height:52px;
+    gap:35px;
 }
 
-@media(max-width:480px){
-
-.btn{
+.hero-copy,
+.hero-visual{
     width:100%;
 }
 
+.hero-copy h1{
+    font-size:clamp(2rem,8vw,2.8rem);
+    line-height:1.15;
+    max-width:100%;
+}
+
+.hero-text{
+    max-width:100%;
+    font-size:.95rem;
+}
+
+.hero-actions{
+    justify-content:center;
+}
+
+.profile-card{
+    width:100%;
+    max-width:380px;
+    margin:auto;
+}
+
+.stats-grid{
+    grid-template-columns:repeat(2,1fr);
 }
 
 }
+
+@media (max-width:480px){
+
+.container{
+    width:92%;
+}
+
+.hero{
+    padding-top:15px;
+}
+
+.hero-copy h1{
+    font-size:1.9rem;
+}
+
+.hero-actions{
+    flex-direction:column;
+    align-items:center;
+}
+
+.hero-actions .btn{
+    width:100%;
+    max-width:260px;
+}
+
+.stats-grid{
+    grid-template-columns:1fr;
+}
+
+.profile-top{
+    flex-direction:column;
+    text-align:center;
+}
+
+.avatar-ring{
+    width:90px;
+    height:90px;
+}
+
+.profile-card{
+    padding:18px;
+}
+
+}
+
 .eyebrow{
-    font-size: 1.25rem;
-    font-weight: 700;
-    min-height: 35px;
-    letter-spacing: .5px;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    max-width:100%;
+    font-size:clamp(.9rem,4vw,1.2rem);
+    padding:10px 16px;
+    text-align:center;
 }
 
 #typing{
@@ -1316,6 +1387,8 @@ transform:translateY(-6px);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
     animation:gradientMove 5s linear infinite;
+     white-space:normal;
+    word-break:break-word;
 }
 
 @keyframes gradientMove{
@@ -1437,21 +1510,7 @@ left:150%;
 
 }
 
-.code-window code{
 
-    display:block;
-
-    overflow:hidden;
-
-    white-space:pre;
-
-    border-right:2px solid #00d084;
-
-    animation:
-    typing 4s steps(45),
-    blink .8s infinite;
-
-}
 
 @keyframes typing{
 
@@ -1637,4 +1696,162 @@ left:150%;
 .journey-card:hover h3{
     color:#ef7c2a;
     transform:translateX(8px);
+}
+
+/* ==========================
+   STATS CARD ANIMATION
+========================== */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+    margin-top:45px;
+}
+
+.stat-card{
+    position:relative;
+    overflow:hidden;
+    border-radius:22px;
+    text-align:center;
+    transition:all .45s ease;
+    cursor:pointer;
+
+    animation:floatStat 5s ease-in-out infinite;
+}
+
+.stat-card:nth-child(2){
+    animation-delay:.4s;
+}
+
+.stat-card:nth-child(3){
+    animation-delay:.8s;
+}
+
+.stat-card:nth-child(4){
+    animation-delay:1.2s;
+}
+
+/* Hover */
+
+.stat-card:hover{
+    transform:
+        translateY(-12px)
+        scale(1.04);
+
+    box-shadow:0 20px 45px rgba(255,107,43,.30);
+    border:1px solid rgba(255,107,43,.45);
+}
+
+/* Shine Effect */
+
+.stat-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:60%;
+    height:100%;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.25),
+        transparent
+    );
+
+    transition:.8s;
+}
+
+.stat-card:hover::before{
+    left:160%;
+}
+
+/* Orange Top Border */
+
+.stat-card::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:4px;
+
+    background:linear-gradient(
+        90deg,
+        #ff6b2b,
+        #ffb347
+    );
+
+    transform:scaleX(0);
+    transition:.35s;
+}
+
+.stat-card:hover::after{
+    transform:scaleX(1);
+}
+
+/* Number */
+
+.stat-card h3{
+    color:#ff8c42;
+    transition:.35s;
+}
+
+.stat-card:hover h3{
+    transform:scale(1.12);
+    letter-spacing:1px;
+}
+
+/* Text */
+
+.stat-card p{
+    transition:.35s;
+}
+
+.stat-card:hover p{
+    color:#ffffff;
+}
+
+/* Floating */
+
+@keyframes floatStat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-6px);
+    }
+
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media (max-width:992px){
+
+.stats-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media (max-width:576px){
+
+.stats-grid{
+    grid-template-columns:1fr;
+    gap:18px;
+}
+
+.stat-card{
+    padding:24px 18px;
+}
+
+.stat-card h3{
+    font-size:1.8rem;
+}
+
 }
