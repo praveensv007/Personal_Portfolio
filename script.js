@@ -52,3 +52,69 @@ document.addEventListener("DOMContentLoaded", () => {
     revealEls.forEach(el => observer.observe(el));
   }
 });
+const roles = [
+    {
+        text: "Java Full Stack Developer",
+        color: "#00E676"   // Green
+    },
+    {
+        text: "Java Developer",
+        color: "#FF9800"   // Orange
+    },
+    {
+        text: "Frontend Developer",
+        color: "#03A9F4"   // Blue
+    },
+    {
+        text: "Backend Developer",
+        color: "#E91E63"   // Pink
+    },
+    {
+        text: "Software Developer",
+        color: "#9C27B0"   // Purple
+    }
+];
+
+let roleIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+const typing = document.getElementById("typing");
+
+function type() {
+
+    const current = roles[roleIndex];
+
+    typing.style.color = current.color;
+
+    if(!deleting){
+
+        typing.textContent = current.text.substring(0,charIndex++);
+
+    }else{
+
+        typing.textContent = current.text.substring(0,charIndex--);
+
+    }
+
+    let speed = deleting ? 50 : 100;
+
+    if(!deleting && charIndex > current.text.length){
+
+        deleting = true;
+        speed = 1500;
+
+    }
+
+    if(deleting && charIndex < 0){
+
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+
+    }
+
+    setTimeout(type,speed);
+
+}
+
+type();
